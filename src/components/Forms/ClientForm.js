@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Controls from '../Controls/Controls';
 import { CustomerForm, Form } from '../Forms/CustomForm';
@@ -30,7 +30,7 @@ import Title from '../BaseDasbord/Title';
           ...temp
       })
   
-      if (fieldValues == values)
+      if (fieldValues === values)
           return Object.values(temp).every(x => x === "")
   }
   
