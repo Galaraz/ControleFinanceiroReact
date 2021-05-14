@@ -36,15 +36,15 @@ export default function Client() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Ultimas Empresas</Title>
+      <Title>Ultimos Clientes</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Nome</TableCell>
             <TableCell>Endereço</TableCell>
             
-            <TableCell>CNPJ</TableCell>
-            <TableCell align="right">Razao Social</TableCell>
+            <TableCell>Telefone</TableCell>
+            <TableCell align="right">Email</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

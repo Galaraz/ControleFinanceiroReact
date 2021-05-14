@@ -8,23 +8,23 @@ import Title from '../BaseDasbord/Title';
 const typeItems = [
   { id: 'despesa', title: 'Despesa' },
   { id: 'receita', title: 'Receita' },
-  { id: 'outros', title: 'Outros' },
 ];
 
 const initialFValues = {
-  id: 0,
-  valor: '',
-  tipo: 'despesa',
-  receptor: '',
+  
   hireDate: new Date(),
-  isPay: false,
+  receptor: '',
+  type: '',
+  isPaid: false,
+  value: '',
+ 
 };
 
 export default function Orderpage() {
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
-    if ('fullName' in fieldValues)
-      temp.fullName = fieldValues.fullName ? '' : 'This field is required.';
+    if ('receptor' in fieldValues)
+      temp.receptor = fieldValues.receptor ? '' : 'This field is required.';
     if ('email' in fieldValues)
       temp.email = /$^|.+@.+..+/.test(fieldValues.email) ? '' : 'Email is not valid.';
     if ('mobile' in fieldValues)
@@ -67,18 +67,18 @@ export default function Orderpage() {
               error={errors.departmentId}
             />
             <Controls.Input
-              name="valor"
+              name="value"
               label="Valor"
-              value={values.fullName}
+              value={values.value}
               onChange={handleInputChange}
-              error={errors.fullName}
+              error={errors.value}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Controls.RadioGroup
-              name="tipo"
+              name="type"
               label="Tipo"
-              value={values.gender}
+              value={values.type}
               onChange={handleInputChange}
               items={typeItems}
             />
@@ -92,7 +92,7 @@ export default function Orderpage() {
             <Controls.Checkbox
               name="isPay"
               label="Paga?"
-              value={values.isPermanent}
+              value={values.isPay}
               onChange={handleInputChange}
             />
 

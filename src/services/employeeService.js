@@ -1,3 +1,5 @@
+import Axios from 'axios';
+
 const KEYS ={
     employees:'employees',
     employeeId:'employeeId'
@@ -10,17 +12,21 @@ export const getDepartmentCollection = ()=>([
     { id: '4', title: 'HR' },
 ])
 
-export function insertEmployee(data) {
-    let employees=getAllEmployees();
+export async function  insertEmployee (data) {
+   
+    /*let employees=getAllEmployees();
     data['id'] = generateEmployeeId()
     employees.push(data)
-    localStorage.setItem(KEYS.employees,JSON.stringify(employees))
+    localStorage.setItem(KEYS.employees,JSON.stringify(employees)) */
+    const result = await Axios.post('http://localhost:3001/conta',data)
+
+    console.log(result);
 }
 
 export function generateEmployeeId() {
     if (localStorage.getItem(KEYS.employeeId) == null)
         localStorage.setItem(KEYS.employeeId, '0')
-    var id = parseInt(localStorage.getItem(KEYS.employeeId))
+    let id = parseInt(localStorage.getItem(KEYS.employeeId))
     localStorage.setItem(KEYS.employeeId, (++id).toString())
     return id;
 }

@@ -5,9 +5,9 @@ import { ComboBox } from '../../components';
 const HomePage = () => (
   <>
     <ComboBox>
-      <Dashboard />
+      <Dashboard /> 
     </ComboBox>
-  </>
+  </>   
 );
 
 export default HomePage;

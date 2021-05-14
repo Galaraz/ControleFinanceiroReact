@@ -8,24 +8,24 @@ import Title from '../BaseDasbord/Title';
  
   const initialFValues = {
     id: 0,
-    nome: '',
-    cnpj: '',
-    razaoSocial: '',
-    
+    fullName: '',
+    endereco:'',
+    mobile: '',
+    email: '',
+        
   };
 
   export default function ClientForm() {
    
    const validate = (fieldValues = values) => {
       let temp = { ...errors }
-      if ('Nome' in fieldValues)
-          temp.fullName = fieldValues.fullName ? "" : "Este campo e requirido."
+      if ('fullName' in fieldValues)
+          temp.fullName = fieldValues.fullName ? '' : "Este campo e requirido."
       if ('email' in fieldValues)
-          temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
+          temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? '' : "Endereco is not valid."
       if ('mobile' in fieldValues)
-          temp.mobile = fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required."
-      if ('departmentId' in fieldValues)
-          temp.departmentId = fieldValues.departmentId.length !== 0 ? "" : "This field is required."
+          temp.mobile = fieldValues.mobile.length > 9 ? '' : 'Minimum 10 numbers required.';
+      
       setErrors({
           ...temp
       })
@@ -56,40 +56,41 @@ import Title from '../BaseDasbord/Title';
       <>
         
            <Form onSubmit={handleSubmit}>
-           <Title>Cadastro de Empresas</Title>
+           <Title>Cadastrar Cliente </Title>
               <Grid container>
               
                   <Grid item xs={12} sm={6} md={6} lg={6}>
                   
                       <Controls.Input
-                          name="Nome"
+                          name="fullName"
                           label="Nome"
                           value={values.fullName}
                           onChange={handleInputChange}
                           error={errors.fullName}
                       />
-                      <Controls.Input
-                          label="Endereco"
+                        <Controls.Input
+                          label="Endereço"
                           name="endereco"
-                          value={values.email}
+                          value={values.endereco}
                           onChange={handleInputChange}
-                          error={errors.email}
                       />
+                      
   
                   </Grid>
                   <Grid item xs={12} sm={6} md={6} lg={6}>
                   <Controls.Input
-                          label="CNPJ"
-                          name="cnpj"
+                          label="Celular"
+                          name="mobile"
                           value={values.mobile}
                           onChange={handleInputChange}
                           error={errors.mobile}
                       />
-                      <Controls.Input
-                          label="Razão Social"
-                          name="razaoSocial"
-                          value={values.city}
+                    <Controls.Input
+                          label="Email"
+                          name="email"
+                          value={values.email}
                           onChange={handleInputChange}
+                          error={errors.email}
                       />
                     </Grid>
                     <Grid item xs={12}>
