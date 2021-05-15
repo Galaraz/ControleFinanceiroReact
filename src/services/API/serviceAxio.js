@@ -13,7 +13,7 @@ const requestAllCount = async () => {
 
 const requestAllClient = async () => {
     try {
-        const {data} = await Axios.get('https://api-controlefinanceiro-heroku.herokuapp.com/client');
+        const data = await Axios.get('https://api-controlefinanceiro-heroku.herokuapp.com/client');
         console.log("FRONT_END BUSCANDO TODOS", data);
         return data;
     } catch (error) {
@@ -23,7 +23,7 @@ const requestAllClient = async () => {
 
 const PostCount = async () => {
     try{
-        const result = await Axios.post('http://localhost:3001/conta',
+        const result = await Axios.post('https://api-controlefinanceiro-heroku.herokuapp.com/conta',
         );
         console.log("FRONT_Adicionando Valor", result);
         return result;
@@ -36,7 +36,7 @@ const PostCount = async () => {
 
 const PostClient = async () => {
     try{
-        const result = await Axios.post('http://localhost:3001/client',
+        const result = await Axios.post('https://api-controlefinanceiro-heroku.herokuapp.com/client',
         );
         console.log("FRONT_END Adicionando ", result);
         return result;
