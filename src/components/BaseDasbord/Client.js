@@ -34,12 +34,21 @@ export default function Client() {
   const classes = useStyles();
   const [result, setResult] = useState([]);
   
-  useEffect( async ()=>{
+  async function xablau() {
     const getResult = await requestAllClient();
     console.log(getResult);
-    setResult(getResult);
+    setResult(getResult)
+    
+  }
+
+  useEffect(()=>{
+    console.log("passou aqui");
+    xablau();
+        
   },[])
   
+console.log(result);
+
   return (
     <React.Fragment>
       <Title>Ultimos Clientes</Title>
