@@ -23,6 +23,17 @@ export async function  insertEmployee (data) {
     console.log(result);
 }
 
+export async function  insertClient (data) {
+   
+    /*let employees=getAllEmployees();
+    data['id'] = generateEmployeeId()
+    employees.push(data)
+    localStorage.setItem(KEYS.employees,JSON.stringify(employees)) */
+    const result = await Axios.post('http://localhost:3001/client',data)
+
+    console.log(result);
+}
+
 export function generateEmployeeId() {
     if (localStorage.getItem(KEYS.employeeId) == null)
         localStorage.setItem(KEYS.employeeId, '0')

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState }from 'react';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -8,9 +8,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 import { Link as RouterLink } from 'react-router-dom';
+import {requestAllClient}  from '../../services/API/serviceAxio';
 
 // Generate Order Data
-function createData(id, name,address , cnpj, razaoSocial) {
+/* function createData(id, name,address , cnpj, razaoSocial) {
   return { id, name, address, cnpj, razaoSocial };
 }
 
@@ -20,11 +21,8 @@ const rows = [
   createData(2, 'Tom Scholz', 'lugar', 100.81, 'medicoanomnimos'),
   createData(3, 'Michael Jackson', 'endereço ae', 654.39, 'nerverland' ),
   createData(4, 'Bruce Springsteen', 'um endereço maneiro', 212.79, 'cantor'),
-];
+]; */
 
-/* function preventDefault(event) {
-  event.preventDefault();
-} */
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -34,6 +32,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Client() {
   const classes = useStyles();
+  const [result, setResult] = useState([]);
+  
+  useEffect( async ()=>{
+    const getResult = await requestAllClient();
+    console.log(getResult);
+    setResult(getResult);
+  },[])
+  
   return (
     <React.Fragment>
       <Title>Ultimos Clientes</Title>
@@ -48,12 +54,12 @@ export default function Client() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {result.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.fullName}</TableCell>
               <TableCell>{row.address}</TableCell>             
-              <TableCell>{row.cnpj}</TableCell>
-              <TableCell align="right">{row.razaoSocial}</TableCell>
+              <TableCell>{row.mobile}</TableCell>
+              <TableCell align="right">{row.email}</TableCell>
             </TableRow>
           ))}
         </TableBody>

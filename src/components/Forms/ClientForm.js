@@ -7,7 +7,7 @@ import Title from '../BaseDasbord/Title';
 
  
   const initialFValues = {
-    id: 0,
+    
     fullName: '',
     endereco:'',
     mobile: '',
@@ -46,7 +46,7 @@ import Title from '../BaseDasbord/Title';
   const handleSubmit = e => {
       e.preventDefault()
       if (validate()){
-          employeeService.insertEmployee(values)
+          employeeService.insertClient(values)
           resetForm()
       }
   }
