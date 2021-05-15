@@ -39,10 +39,14 @@ export default function Orders() {
   const classes = useStyles();
   const [result, setResult] = useState([]);
   
-  useEffect( async ()=>{
-    const getResult = await requestAllCount();
+async function ActionXablau() {
+  const getResult = await requestAllCount();
     console.log(getResult);
     setResult(getResult);
+}
+   
+  useEffect(()=>{
+    ActionXablau();
   },[])
 
   return (

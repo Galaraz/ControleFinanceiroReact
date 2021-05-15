@@ -3,8 +3,8 @@ import Axios from 'axios';
 
 const requestAllCount = async () => {
     try {
-        const data = await Axios.get('https://api-controlefinanceiro-heroku.herokuapp.com/conta');
-        console.log("FRONT_END BUSCANDO TODOS", data);
+        const {data} = await Axios.get('https://api-controlefinanceiro-heroku.herokuapp.com/conta');
+        //console.log("FRONT_END BUSCANDO TODOS", data);
         return data;
     } catch (error) {
         console.error(error.message)
@@ -13,8 +13,8 @@ const requestAllCount = async () => {
 
 const requestAllClient = async () => {
     try {
-        const data = await Axios.get('https://api-controlefinanceiro-heroku.herokuapp.com/client');
-        console.log("FRONT_END BUSCANDO TODOS", data);
+        const {data} = await Axios.get('https://api-controlefinanceiro-heroku.herokuapp.com/client');
+       // console.log("FRONT_END BUSCANDO TODOS", data);
         return data;
     } catch (error) {
         console.error(error.message)
