@@ -49,6 +49,7 @@ export default function Orderpage() {
     if (validate()) {
       employeeService.insertEmployee(values);
       resetForm();
+      
     }
   };
 

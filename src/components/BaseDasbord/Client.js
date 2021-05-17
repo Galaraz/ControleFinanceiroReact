@@ -34,20 +34,19 @@ export default function Client() {
   const classes = useStyles();
   const [result, setResult] = useState([]);
   
-  async function xablau() {
+  async function updateDate() {
     const getResult = await requestAllClient();
-    console.log(getResult);
-    setResult(getResult)
     
+    setResult(getResult)
   }
 
   useEffect(()=>{
-    console.log("passou aqui");
-    xablau();
+    
+    updateDate();
         
   },[])
-  
-console.log(result);
+ 
+
 
   return (
     <React.Fragment>
@@ -64,7 +63,7 @@ console.log(result);
         </TableHead>
         <TableBody>
           {result.map((row) => (
-            <TableRow key={row.id}>
+            <TableRow key={row._id }>
               <TableCell>{row.fullName}</TableCell>
               <TableCell>{row.address}</TableCell>             
               <TableCell>{row.mobile}</TableCell>

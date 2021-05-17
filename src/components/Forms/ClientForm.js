@@ -9,14 +9,15 @@ import Title from '../BaseDasbord/Title';
   const initialFValues = {
     
     fullName: '',
-    endereco:'',
+    address:'',
     mobile: '',
     email: '',
-        
+    ativo: "true",
+   
   };
 
   export default function ClientForm() {
-   
+        
    const validate = (fieldValues = values) => {
       let temp = { ...errors }
       if ('fullName' in fieldValues)
@@ -43,15 +44,24 @@ import Title from '../BaseDasbord/Title';
       resetForm
   } = CustomerForm(initialFValues, true, validate);
   
-  const handleSubmit = e => {
+ 
+  const handleSubmit = async (e) => {
       e.preventDefault()
       if (validate()){
-          employeeService.insertClient(values)
-          resetForm()
+        employeeService.insertClient(values);
+        console.log(values)
+        resetForm()
+              
       }
   }
-    
-    
+ 
+/* async function xablau2 () {
+  const getResult = await requestAllClient();
+        
+  console.log(result);
+}
+*/
+
     return (
       <>
         
@@ -70,8 +80,8 @@ import Title from '../BaseDasbord/Title';
                       />
                         <Controls.Input
                           label="Endereço"
-                          name="endereco"
-                          value={values.endereco}
+                          name="address"
+                          value={values.address}
                           onChange={handleInputChange}
                       />
                       

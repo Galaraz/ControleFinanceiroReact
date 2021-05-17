@@ -14,13 +14,22 @@ export const getDepartmentCollection = ()=>([
 
 export async function  insertEmployee (data) {
    
+    //console.log(data);
     /*let employees=getAllEmployees();
     data['id'] = generateEmployeeId()
     employees.push(data)
     localStorage.setItem(KEYS.employees,JSON.stringify(employees)) */
-    const result = await Axios.post('http://localhost:3001/conta',data)
-
+   
+    /* const result = await Axios.post('http://localhost:3001/conta',data)
     console.log(result);
+    return result;  */
+
+    const result = await Axios.post('https://api-controlefinanceiro-heroku.herokuapp.com/conta',data
+        );
+        console.log("FRONT_END Adicionando ", result);
+        console.log(result)
+        return result;
+    
 }
 
 export async function  insertClient (data) {
@@ -29,9 +38,17 @@ export async function  insertClient (data) {
     data['id'] = generateEmployeeId()
     employees.push(data)
     localStorage.setItem(KEYS.employees,JSON.stringify(employees)) */
+/*     
     const result = await Axios.post('http://localhost:3001/client',data)
 
-    console.log(result);
+    return result; */
+    
+    const result = await Axios.post('https://api-controlefinanceiro-heroku.herokuapp.com/client',data
+    );
+    console.log("FRONT_END Adicionando ", result);
+    console.log(result)
+    return result;
+
 }
 
 export function generateEmployeeId() {
