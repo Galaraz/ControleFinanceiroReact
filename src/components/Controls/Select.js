@@ -14,7 +14,7 @@ export default function Select(props) {
                 name={name}
                 value={value}
                 onChange={onChange}>
-                <MenuItem value="">vazio</MenuItem>
+                <MenuItem value="">Cadastrar Novo Cliente...</MenuItem>
                 {
                     options.map(
                         item => (<MenuItem key={item.fullName} value={item.fullName}>{item.fullName}</MenuItem>)
