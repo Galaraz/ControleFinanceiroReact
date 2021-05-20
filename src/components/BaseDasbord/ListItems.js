@@ -8,6 +8,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import { Link } from 'react-router-dom';
+import Tooltip from '@material-ui/core/Tooltip';
 
 export const mainListItems = (
   <div>
@@ -15,7 +16,9 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
+      <Tooltip title="Add" interactive>
       <ListItemText primary="Painel" />
+      </Tooltip>
     </ListItem>
     <ListItem button component={Link} to="/order">
       <ListItemIcon>
