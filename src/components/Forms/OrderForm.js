@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Controls from '../Controls/Controls';
 import { CustomerForm, Form } from '../Forms/CustomForm';
 import * as employeeService from '../../services/employeeService';
 import Title from '../BaseDasbord/Title';
+import Axios from 'axios';
 
 const typeItems = [
   { id: 'despesa', title: 'Despesa' },
@@ -21,6 +22,26 @@ const initialFValues = {
 };
 
 export default function Orderpage() {
+  const [result, setResult] = useState([]);
+  useEffect(() => {
+    try {
+       Axios.get('https://api-controlefinanceiro-heroku.herokuapp.com/client').then(response =>{
+        const result = response.data.map((res) => {
+          const dataSet = {
+            //id: res._id,
+            fullName: res.fullName
+          };
+          return dataSet;
+        });
+       console.log(result);
+        setResult(result);
+         })
+  
+  } catch (error) {
+      console.error(error.message)
+  }
+  },[]);
+
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
     if ('receptor' in fieldValues)
@@ -29,8 +50,7 @@ export default function Orderpage() {
       temp.email = /$^|.+@.+..+/.test(fieldValues.email) ? '' : 'Email is not valid.';
     if ('mobile' in fieldValues)
       temp.mobile = fieldValues.mobile.length > 9 ? '' : 'Minimum 10 numbers required.';
-    if ('departmentId' in fieldValues)
-      temp.departmentId = fieldValues.departmentId.length !== 0 ? '' : 'This field is required.';
+   
     setErrors({
       ...temp,
     });
@@ -47,7 +67,8 @@ export default function Orderpage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      employeeService.insertEmployee(values);
+     employeeService.insertEmployee(values);
+      console.log(values)
       resetForm();
       
     }
@@ -62,10 +83,10 @@ export default function Orderpage() {
             <Controls.Select
               name="receptor"
               label="Receptor"
-              value={values.departmentId}
+              value={values.receptor}
               onChange={handleInputChange}
-              options={employeeService.getDepartmentCollection()}
-              error={errors.departmentId}
+              options={result}
+              error={errors.receptor}
             />
             <Controls.Input
               name="value"

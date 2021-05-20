@@ -9,6 +9,8 @@ export function CustomerForm(initialFValues, validateOnChange = false, validate)
 
     const handleInputChange = e => {
         const { name, value } = e.target
+       console.log(name, value ,"aqui !!");
+     //  console.log("\033[34m Aqui esta o texto em vermelho.");
         setValues({
             ...values,
             [name]: value
