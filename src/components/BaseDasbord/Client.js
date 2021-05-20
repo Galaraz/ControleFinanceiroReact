@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 import { Link as RouterLink } from 'react-router-dom';
 import {requestAllClient}  from '../../services/API/serviceAxio';
-
+import TablePagination from '@material-ui/core/TablePagination';
 // Generate Order Data
 /* function createData(id, name,address , cnpj, razaoSocial) {
   return { id, name, address, cnpj, razaoSocial };
@@ -32,8 +32,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Client() {
   const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [result, setResult] = useState([]);
   
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+  
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, result.length - page * rowsPerPage);
+
   async function updateDate() {
     const getResult = await requestAllClient();
     
@@ -62,7 +76,9 @@ export default function Client() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {result.map((row) => (
+          {result
+          .slice(page *rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((row) => (
             <TableRow key={row._id }>
               <TableCell>{row.fullName}</TableCell>
               <TableCell>{row.address}</TableCell>             
@@ -70,8 +86,23 @@ export default function Client() {
               <TableCell align="right">{row.email}</TableCell>
             </TableRow>
           ))}
+            {emptyRows > 0 && (
+            <TableRow style={{ height: 53 * emptyRows }}>
+              <TableCell colSpan={6} />
+            </TableRow>
+          )}
         </TableBody>
       </Table>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={result.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+        color="primary"
+      />
       <div className={classes.seeMore}>
         <Link  color="primary" component={ RouterLink } to="/order" >
           Veja mais 
