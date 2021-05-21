@@ -9,8 +9,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 import { Link as RouterLink } from 'react-router-dom';
 import {requestAllCount}  from '../../services/API/serviceAxio';
-
-
+import TablePagination from '@material-ui/core/TablePagination';
+import currencyPrettyPrint from "../Functions/currencyPrettyPrint";
+import currencyPrettyDate from '../Functions/currencyPrettyDate';
 // Generate Order Data
 
 
@@ -37,14 +38,32 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Orders() {
   const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [result, setResult] = useState([]);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
   
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, result.length - page * rowsPerPage);
+  
+
+
 async function ActionUpdate() {
   const getResult = await requestAllCount();
     
     setResult(getResult);
 }
-   
+ 
+
+
   useEffect(()=>{
     ActionUpdate();
   },[])
@@ -63,17 +82,34 @@ async function ActionUpdate() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {result.map((row) => (
+          {result
+          .slice(page *rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((row) => (
             <TableRow key={row._id}>
-              <TableCell>{row.hireDate}</TableCell>
+              <TableCell>{currencyPrettyDate(row.hireDate)}</TableCell>
               <TableCell>{row.receptor}</TableCell>
               <TableCell>{row.type}</TableCell>
               <TableCell>{row.paid}</TableCell>
-              <TableCell align="right">{row.value}</TableCell>
+              <TableCell align="right">{currencyPrettyPrint(row.value)}</TableCell>
             </TableRow>
           ))}
+          {emptyRows > 0 && (
+            <TableRow style={{ height: 53 * emptyRows }}>
+              <TableCell colSpan={6} />
+            </TableRow>
+         )}
         </TableBody>
       </Table>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={result.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+        color="primary"
+      />
       <div className={classes.seeMore}>
         <Link  color="primary" component={ RouterLink } to="/order" >
           Veja mais 
