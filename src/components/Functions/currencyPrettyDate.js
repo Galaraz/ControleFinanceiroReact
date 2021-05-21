@@ -1,13 +1,16 @@
 
 function currencyPrettyDate(data) {
-    const dia = data.split("T")[0].split("-")[2];
+     
+  
+  const dia = data.split("T")[0].split("-")[2];
     const mes = data.split("T")[0].split("-")[1];
     const ano = data.split("T")[0].split("-")[0];
   
     const hora = data.split("T")[1].split(":")[0];
     const minuto = data.split("T")[1].split(":")[1];
-    const segundo = data.split("T")[1].split(":")[2];
+   // const segundo = data.split("T")[1].split(":")[2];
   
+   
     let labelMes;
 
     switch (mes) {
@@ -45,11 +48,14 @@ function currencyPrettyDate(data) {
             labelMes = "Novembro";
             break;
             case "12":
-      labelMes = "Dezembro";
+            labelMes = "Dezembro";
       break;
+
+      default:
+      break;  
   }
 
-  const dataLabel = `Em ${dia} de ${labelMes} de ${ano}, ${hora}:${minuto}`;
+  const dataLabel = `${dia} de ${labelMes} de ${ano}- ${hora}:${minuto}`;
 
   return dataLabel; 
 }

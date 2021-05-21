@@ -10,7 +10,8 @@ import Title from './Title';
 import { Link as RouterLink } from 'react-router-dom';
 import {requestAllCount}  from '../../services/API/serviceAxio';
 import TablePagination from '@material-ui/core/TablePagination';
-
+import currencyPrettyPrint from "../Functions/currencyPrettyPrint";
+import currencyPrettyDate from '../Functions/currencyPrettyDate';
 // Generate Order Data
 
 
@@ -85,11 +86,11 @@ async function ActionUpdate() {
           .slice(page *rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((row) => (
             <TableRow key={row._id}>
-              <TableCell>{row.hireDate}</TableCell>
+              <TableCell>{currencyPrettyDate(row.hireDate)}</TableCell>
               <TableCell>{row.receptor}</TableCell>
               <TableCell>{row.type}</TableCell>
               <TableCell>{row.paid}</TableCell>
-              <TableCell align="right">{row.value}</TableCell>
+              <TableCell align="right">{currencyPrettyPrint(row.value)}</TableCell>
             </TableRow>
           ))}
           {emptyRows > 0 && (
